@@ -5,7 +5,6 @@ import './App.css';
 const TaxDeedAIFund = () => {
   const [account, setAccount] = useState(null);
 
-  // Simulación de datos de la IA
   const properties = [
     { id: 1, location: 'Miami', price: 140000, roi: 25.71 },
     { id: 2, location: 'Orlando', price: 120000, roi: 20.5 },
@@ -18,7 +17,6 @@ const TaxDeedAIFund = () => {
     { roi: -Infinity }
   );
 
-  // Conectar MetaMask
   const connectWallet = async () => {
     if (window.ethereum) {
       try {
@@ -33,7 +31,6 @@ const TaxDeedAIFund = () => {
     }
   };
 
-  // Llamar al smart contract (simplificado)
   const buyTokens = async () => {
     if (!account) {
       alert('Conecta tu billetera primero.');
@@ -42,13 +39,11 @@ const TaxDeedAIFund = () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'; // Pega la dirección del contrato desplegado
-      const abi = [
-        'function buyTokens() public payable'
-      ];
+      const contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'; // 
+      const abi = ['function buyTokens() public payable'];
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      const tx = await contract.buyTokens({ value: ethers.parseEther('0.01') }); // Enviar 0.01 ETH
-      await Ascension awaits
+      const tx = await contract.buyTokens({ value: ethers.parseEther('0.01') });
+      await tx.wait();
       alert('Transacción enviada: ' + tx.hash);
     } catch (error) {
       alert('Error en la transacción: ' + error.message);
